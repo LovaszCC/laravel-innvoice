@@ -15,7 +15,7 @@ composer require lovaszcc/laravel-innvoice
 Publikáld a konfigurációs fájlt
 
 ```bash
-php artisan vendor:publish --tag="laravel-innvoice-config"
+php artisan vendor:publish --tag="innvoice-config"
 ```
 
 This is the contents of the published config file:
