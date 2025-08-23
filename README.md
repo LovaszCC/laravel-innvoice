@@ -12,7 +12,7 @@ Telepítsd a csomagot composerrel
 composer require lovaszcc/laravel-innvoice
 ```
 
-Publikált a konfigurációs fájlt
+Publikáld a konfigurációs fájlt
 
 ```bash
 php artisan vendor:publish --tag="laravel-innvoice-config"
@@ -31,6 +31,16 @@ return [
 ```
 
 Vedd fel a .env fájlba az innvoice.hu tól kapott adatokat, illetve adj meg egy elérési utat a számlák tárolására, amelyet később e-mailben kiküldesz.
+
+## Checkbook ID
+
+Ahhoz, hogy megtudd mi a számlatömb azonosítója futtasd a következő kódot:
+
+```php
+    dd(LaravelInnvoice::getCheckbooks());
+```
+
+A visszakapott tömbben láthatod számlatömbjeidet, válaszd ki, hogy melyiket szeretnéd használni és annak a TABLE_ID értékét tedd a checkbook_id env változóba.
 
 ## API Dokumentáció
 
