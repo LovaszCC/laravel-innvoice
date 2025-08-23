@@ -81,6 +81,25 @@ https://innvoicesupport.zendesk.com/hc/hu/sections/360001065819-API-hozz%C3%A1f%
 use LovaszCC\LaravelInnvoice\Enums\AFAKulcsEnum;
 use LovaszCC\LaravelInnvoice\Facades\LaravelInnvoice;
 
+    $tetelek = [
+        [
+            'TetelNev' => 'Próba tétel 1',
+            'AfaSzoveg' => AFAKulcsEnum::AAM->value,
+            'Brutto' => '1',
+            'EgysegAr' => '1700',
+            'Mennyiseg' => '1',
+            'MennyisegEgyseg' => 'db',
+        ],
+        [
+            'TetelNev' => 'Próba tétel 2',
+            'AfaSzoveg' => AFAKulcsEnum::AAM->value,
+            'Brutto' => '1',
+            'EgysegAr' => '2600',
+            'Mennyiseg' => '1',
+            'MennyisegEgyseg' => 'db',
+        ],
+    ];
+
     $data = [
         'invoices' => [
             'invoice' => [
@@ -100,19 +119,10 @@ use LovaszCC\LaravelInnvoice\Facades\LaravelInnvoice;
                 'VevoAdoszam' => '12345678-x-yy', // Ne kerüljön a tömbbe ha magánszemély
                 'Felretett' => '0', // fizetett státusz esetén 0 mint lezárt számla 1 esetén "piszkozat"
                 'Proforma' => '0',
-
-                'tetel' => [
-                    'TetelNev' => 'Próba tétel',
-                    'AfaSzoveg' => AFAKulcsEnum::AAM->value,
-                    'Brutto' => '1',
-                    'EgysegAr' => '1200',
-                    'Mennyiseg' => '2',
-                    'MennyisegEgyseg' => 'db',
-                ],
             ],
         ],
     ];
-    LaravelInnvoice::createInvoice($data)
+    LaravelInnvoice::createInvoice($data, $tetelek)
 ```
 
 ## Visszaadott adatok

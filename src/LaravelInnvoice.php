@@ -44,9 +44,15 @@ class LaravelInnvoice
         return XMLHelpers::parseXmlToArray($response->body());
     }
 
-    public function createInvoice(array $data): array
+    public function createInvoice(array $data, array $tetelek = []): array
     {
         $endpoint = "https://api.innvoice.hu/{$this->company_name}/invoice";
+        if ($tetelek == null) {
+            throw new \Exception('Tetelek are required');
+        }
+
+        // Add items to the invoice data
+        $this->addItemsToInvoice($data, $tetelek);
 
         $xmlData = XMLHelpers::buildXmlFromArray($data);
         $response = Http::withHeaders($this->setHeaders())->withBody($xmlData, 'text/xml')->post($endpoint);
@@ -120,5 +126,24 @@ class LaravelInnvoice
         file_put_contents($filePath, $response->body());
 
         return $filePath;
+    }
+
+    /**
+     * Add items to the invoice data structure
+     */
+    private function addItemsToInvoice(array &$data, array $tetelek): void
+    {
+        $itemCount = count($tetelek);
+
+        foreach ($tetelek as $index => $item) {
+            $suffix = $itemCount > 1 ? ($index + 1) : '';
+
+            $data['invoices']['invoice']["TetelNev{$suffix}"] = $item['TetelNev'];
+            $data['invoices']['invoice']["AfaSzoveg{$suffix}"] = $item['AfaSzoveg'];
+            $data['invoices']['invoice']["Brutto{$suffix}"] = $item['Brutto'];
+            $data['invoices']['invoice']["EgysegAr{$suffix}"] = $item['EgysegAr'];
+            $data['invoices']['invoice']["Mennyiseg{$suffix}"] = $item['Mennyiseg'];
+            $data['invoices']['invoice']["MennyisegEgyseg{$suffix}"] = $item['MennyisegEgyseg'];
+        }
     }
 }
