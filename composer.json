@@ -1,6 +1,6 @@
 {
     "name": "lovaszcc/laravel-innvoice",
-    "description": "This is my package laravel-innvoice",
+    "description": "Laravel Wrapper for Innvoice.hu Invoice creator software API",
     "keywords": [
         "Lovász Krisztián",
         "laravel",
@@ -65,6 +65,5 @@
             }
         }
     },
-    "minimum-stability": "dev",
     "prefer-stable": true
 }
