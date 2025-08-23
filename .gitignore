@@ -31,3 +31,5 @@ testbench.yaml
 /docs
 /coverage
 .DS_Store
+phpunit.xml.dist
+.editorconfig
