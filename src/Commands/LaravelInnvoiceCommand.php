@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LovaszCC\LaravelInnvoice\Commands;
 
 use Illuminate\Console\Command;
 
-class LaravelInnvoiceCommand extends Command
+final class LaravelInnvoiceCommand extends Command
 {
     public $signature = 'laravel-innvoice';
 

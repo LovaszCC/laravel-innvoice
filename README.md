@@ -135,6 +135,70 @@ array:3 [▼ /
 ]
 ```
 
+## Proforma számla készítés
+
+```php
+    $tetelek = [
+        [
+            'TetelNev' => 'Próba tétel 1',
+            'AfaSzoveg' => AFAKulcsEnum::AAM->value,
+            'Brutto' => '1',
+            'EgysegAr' => '1700',
+            'Mennyiseg' => '1',
+            'MennyisegEgyseg' => 'db',
+        ],
+        [
+            'TetelNev' => 'Próba tétel 2',
+            'AfaSzoveg' => AFAKulcsEnum::AAM->value,
+            'Brutto' => '1',
+            'EgysegAr' => '2600',
+            'Mennyiseg' => '1',
+            'MennyisegEgyseg' => 'db',
+        ],
+    ];
+
+    $data = [
+        'invoices' => [
+            'invoice' => [
+                'VevoNev' => 'Gipsz Jakab',
+                'VevoIrsz' => '1119',
+                'VevoOrszag' => 'HU',
+                'VevoTelep' => 'Budapest',
+                'VevoUtcaHsz' => 'Próba u. 2.',
+                'SzamlatombID' => '1',
+                'SzamlaKelte' => date('Y.m.d.'),
+                'TeljesitesKelte' => date('Y.m.d.'),
+                'Hatarido' => date('Y.m.d.'),
+                'Devizanem' => 'HUF',
+                'FizetesiMod' => 'átutalás',
+                'Fizetve' => '0',
+                'Eszamla' => '1',
+                'VevoAdoszam' => '12345678-1-27', // Magánszemély esetén ne kerüljön a tömbbe
+                'Felretett' => '0',
+                'Proforma' => '1',
+            ],
+        ],
+    ];
+    LaravelInnvoice::createInvoice($data, $tetelek)
+```
+
+## Számla készítés proforma számlából
+
+```php
+    $proforma = [
+        'proforma_invoices' => [
+            'proforma_invoice' => [
+                'TABLE_ID' => 'PROFORMA_SZÁMLA_TABLE_ID_ÉRTÉKE',
+                'SzamlaKelte' => date('Y.m.d.'),
+                'TeljesitesKelte' => date('Y.m.d.'),
+                'Hatarido' => date('Y.m.d.'),
+
+            ],
+        ],
+    ];
+    LaravelInnvoice::createInvoiceFromProforma($proforma);
+```
+
 ## Credits
 
 -   [Lovász Krisztián](https://github.com/LovaszCC)

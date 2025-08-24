@@ -1,16 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LovaszCC\LaravelInnvoice\Helpers;
 
-class XMLHelpers
+use Exception;
+use SimpleXMLElement;
+
+final class XMLHelpers
 {
     /**
      * Convert SimpleXML object to array recursively
      *
-     * @param  \SimpleXMLElement  $xml  The SimpleXML element
+     * @param  SimpleXMLElement  $xml  The SimpleXML element
      * @return array|string The converted array or string value
      */
-    public static function xmlToArray(\SimpleXMLElement $xml): array|string
+    public static function xmlToArray(SimpleXMLElement $xml): array|string
     {
         $array = [];
 
@@ -25,7 +30,7 @@ class XMLHelpers
         // Get children
         $children = $xml->children();
 
-        if (count($children) == 0) {
+        if (count($children) === 0) {
             // No children, this is a leaf node
             $value = (string) $xml;
 
@@ -92,7 +97,7 @@ class XMLHelpers
         $xml = simplexml_load_string($xmlString);
 
         if ($xml === false) {
-            throw new \Exception('Failed to parse XML string');
+            throw new Exception('Failed to parse XML string');
         }
 
         return self::xmlToArray($xml);

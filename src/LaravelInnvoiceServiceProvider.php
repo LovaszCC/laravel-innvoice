@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LovaszCC\LaravelInnvoice;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class LaravelInnvoiceServiceProvider extends PackageServiceProvider
+final class LaravelInnvoiceServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {

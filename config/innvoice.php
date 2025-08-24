@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 // config for LovaszCC/LaravelInnvoice
 return [
     'username' => env('INNVOICE_USERNAME'),
